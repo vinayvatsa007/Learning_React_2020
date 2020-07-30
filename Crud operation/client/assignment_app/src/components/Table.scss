@@ -1,0 +1,22 @@
+.pagination {
+  border: 1px solid rgba(221, 221, 221, 0.781);
+  height: 60px;
+  padding: 4px 6px;
+  ul {
+    li {
+      &:first-child {
+        margin-right: 5px;
+      }
+      &:last-child {
+        margin-left: 5px;
+      }
+      margin: 0 2px;
+      display: inline;
+      padding: 5px;
+      background-color: grey;
+      color: white;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+  }
+}
