@@ -42,9 +42,7 @@ router.get("/totalCount", (req, resp) => {
   });
 });
 router.get("/subject-wise-count", (req, resp) => {
-  // resp.send('get by id' + req.params.id);
   getResultsByQuery("select id, subName from assignment").then((data) => {
-    //  const subjectWiseCount = getSummarizedData(data, "subName");
     resp.send(getSummarizedData(data, "subName"));
   });
 });
