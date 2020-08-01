@@ -41,9 +41,21 @@ router.get("/totalCount", (req, resp) => {
     resp.send(data);
   });
 });
-router.get("/subject-wise-count", (req, resp) => {
+router.get("/count-by-subject", (req, resp) => {
   getResultsByQuery("select id, subName from assignment").then((data) => {
     resp.send(getSummarizedData(data, "subName"));
+  });
+});
+router.get("/count-by-teacher", (req, resp) => {
+  getResultsByQuery("select id, assignmentGivenByTeacher from assignment").then(
+    (data) => {
+      resp.send(getSummarizedData(data, "assignmentGivenByTeacher"));
+    }
+  );
+});
+router.get("/count-by-section", (req, resp) => {
+  getResultsByQuery("select id, section from assignment").then((data) => {
+    resp.send(getSummarizedData(data, "section"));
   });
 });
 router.get("/:id", (req, resp) => {
