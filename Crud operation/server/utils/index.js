@@ -88,29 +88,13 @@ const convertImageBufferToBase64 = (bufferArray) => {
 
 const getPaginatedData = (unPaginatedData = [], startIndex = 0, endIndex) => {
   const result = [];
-  // console.log("Utils->getPaginatedData->startIndex: ", startIndex);
-  // console.log(
-  //   "Utils->getPaginatedData->unPaginatedData.length: ",
-  //   unPaginatedData.length
-  // );
 
   if (endIndex > unPaginatedData.length || !endIndex) {
     endIndex = unPaginatedData.length - 1;
   }
-  // console.log("Utils->getPaginatedData->endIndex: ", endIndex);
-  // if (startIndex == endIndex) {
-  //   return result;
-  // } else {
-  //   for (let i = startIndex; i <= endIndex; i++) {
-  //     result.push(unPaginatedData[i]);
-  //   }
-  //   // console.log(result);
-  //   return result;
-  // }
   for (let i = startIndex; i <= endIndex; i++) {
     result.push(unPaginatedData[i]);
   }
-  // console.log(result);
   return result;
 };
 
@@ -169,25 +153,6 @@ const getSummarizedData = (rowData = [], key) => {
   return finalArray;
 };
 
-// getSummzData = (arr, key) => {
-//   const finalObject = {},
-//     finalArray = [];
-
-//   for (let i = 0; i < arr.length; i++) {
-//     let updatingValue = arr[i][key];
-
-//     if (finalObject[updatingValue]) {
-//       finalObject[updatingValue] += 1;
-//     } else {
-//       finalObject[updatingValue] = 1;
-//     }
-//   }
-
-//   for (let k in finalObject) {
-//     finalArray.push({ name: k, value: finalObject[k] });
-//   }
-//   return finalArray;
-// };
 module.exports = {
   getKeysAndValuesFromReqBody,
   getUpdateSrtingFromReqBody,
