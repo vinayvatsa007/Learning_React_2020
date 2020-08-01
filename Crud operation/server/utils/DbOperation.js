@@ -23,7 +23,7 @@ const { Int } = require("mssql");
 //   database: "schoolmanagement_db",
 // };
 const config = {
-  host: "192.168.1.4",
+  host: "192.168.1.7",
   user: "root",
   password: "Pulsar@180",
   database: "assignment_db",

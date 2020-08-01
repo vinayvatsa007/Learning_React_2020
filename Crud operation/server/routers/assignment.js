@@ -12,6 +12,7 @@ const {
   totalCount,
   getResultsByQuery,
 } = require("../utils/DbOperation");
+const { getSummarizedData } = require("../utils/index");
 
 // if we write multiple routes then its mandatory to do resp.send otherwise it won't allow to go next API and will behave unexpectedly
 router.get(
@@ -43,8 +44,8 @@ router.get("/totalCount", (req, resp) => {
 router.get("/subject-wise-count", (req, resp) => {
   // resp.send('get by id' + req.params.id);
   getResultsByQuery("select id, subName from assignment").then((data) => {
-    // console.log("server side assignment service resp-", data);
-    // resp.send(data);
+    //  const subjectWiseCount = getSummarizedData(data, "subName");
+    resp.send(getSummarizedData(data, "subName"));
   });
 });
 router.get("/:id", (req, resp) => {

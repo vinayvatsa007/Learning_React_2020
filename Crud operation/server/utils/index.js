@@ -159,4 +159,5 @@ module.exports = {
   convertImageBufferToBase64,
   getPaginatedData,
   getSortedData,
+  getSummarizedData,
 };
