@@ -20,3 +20,59 @@
     }
   }
 }
+.paginationUlLiDisabledFirst {
+  border: 1px solid rgba(221, 221, 221, 0.781);
+  height: 60px;
+  padding: 4px 6px;
+  ul {
+    li {
+      &:first-child {
+        margin-right: 5px;
+        pointer-events: none; //This makes it not clickable
+        opacity: 0.6; //This grays it out to look disabled
+      }
+      &:last-child {
+        margin-left: 5px;
+      }
+      margin: 0 2px;
+      display: inline;
+      padding: 5px;
+      background-color: grey;
+      color: white;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+  }
+}
+.paginationUlLiDisabledLast {
+  border: 1px solid rgba(221, 221, 221, 0.781);
+  height: 60px;
+  padding: 4px 6px;
+  ul {
+    li {
+      &:first-child {
+        margin-right: 5px;
+      }
+      &:last-child {
+        margin-left: 5px;
+        pointer-events: none; //This makes it not clickable
+        opacity: 0.6; //This grays it out to look disabled
+      }
+      margin: 0 2px;
+      display: inline;
+      padding: 5px;
+      background-color: grey;
+      color: white;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+  }
+}
+// .disableFirst {
+//   ul {
+//     li {
+//       pointer-events: none; //This makes it not clickable
+//       opacity: 0.6; //This grays it out to look disabled
+//     }
+//   }
+// }

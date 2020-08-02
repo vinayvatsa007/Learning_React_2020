@@ -113,7 +113,6 @@ const find = async (tableName, filters) => {
     if (key && value) {
       query += ` where ${key} like '%${value}%' `;
     }
-
     // if (name && order) {
     //   query += ` order by ${name} ${order} `;
     // }

@@ -171,6 +171,7 @@ class Assignments extends Component {
     this.getAssignmentList(sort, paging);
   };
   onPageChange = ({ sort, paging }) => {
+    console.log("assignment.js->onPageChange->paging ", paging);
     this.getAssignmentList(sort, paging);
   };
 
@@ -335,15 +336,5 @@ class Assignments extends Component {
       this.getAssignmentList();
     }
   }
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevState.searchText !== this.state.searchText) {
-  //     this.setState({
-  //       filteredList: this.state.list.filter((li) => {
-  //         return li.subName.toLowerCase().startsWith(this.state.searchText.toLowerCase());
-  //       })
-  //     });
-  //   }
-  // };
 }
 export default withAuthentication(withStyles(styles)(Assignments));

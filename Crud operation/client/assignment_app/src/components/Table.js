@@ -1,5 +1,4 @@
 import React, { useState, Fragment } from "react";
-// import {useState} from React;
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -29,43 +28,82 @@ const styles = (theme) => ({
 
 const Pagination = (props) => {
   const { paging, totalCountPage } = props;
-  console.log("props.totalCountPage->>>>>>>", props.totalCountPage);
-  const { size } = paging;
-  // const requiredPageCount = Math.ceil(totalCountPage / size);
-  // console.log("requiredPageCount->>>>>>>", requiredPageCount);
-  // let pages = "";
-  // for (let i = 1; i <= requiredPageCount; i++) {
-  //   pages += `<ul><li>${i}</li> </ul>`;
-  // }
-  // console.log("pages jsx dynamic----", pages);
-
-  const handleClick = (event) => {
-    // this.setState({
-    //   currentPage: Number(event.target.id)
-    // });
-    props.onPageChange(Number(event.target.id));
-  };
-
+  const { page, size } = paging;
   const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(totalCountPage / size); i++) {
+  let noOfPages = Math.ceil(totalCountPage / size);
+  for (let i = 1; i <= noOfPages; i++) {
     pageNumbers.push(i);
   }
+  let classToApply = "";
+  let disablePrevButton = false;
+  let disableNextButton = false;
+
+  const handleClick = (event) => {
+    let lastPage = page; //parent prop paging.page
+    let pageToShow = Number(event.target.id);
+    if (event.target.id == "prevPage") {
+      pageToShow = Number(lastPage) - 1;
+      if (pageToShow >= 1) {
+        disablePrevButton = false;
+        console.log("disablePrevButton", disablePrevButton);
+        props.onPageChange(pageToShow);
+      } else {
+        disablePrevButton = true;
+        console.log("disablePrevButton", disablePrevButton);
+      }
+    } else {
+      if (event.target.id == "nextPage") {
+        pageToShow = Number(lastPage) + 1;
+        if (pageToShow <= noOfPages) {
+          disableNextButton = false;
+          console.log("disableNextButton", disableNextButton);
+          props.onPageChange(pageToShow);
+        } else {
+          disableNextButton = true;
+          console.log("disableNextButton", disableNextButton);
+        }
+      } else {
+        pageToShow = event.target.id;
+        props.onPageChange(pageToShow);
+      }
+    }
+  };
 
   const renderPageNumbers = pageNumbers.map((pgNumber) => {
     return (
-      // <li key={pgNumber} id={pgNumber}>
       <li key={pgNumber} id={pgNumber} onClick={handleClick}>
         {pgNumber}
       </li>
     );
   });
 
+  // classToApply =
+  //   disablePrevButton == false ? "pagination" : "paginationUlLiDisabledLast";
+
+  console.log("disablePrevButton", disablePrevButton);
+
   return (
-    <div className="pagination">
+    <div
+      className={
+        disablePrevButton == false ? "pagination" : "paginationUlLiDisabledLast"
+      }
+    >
       <ul>
-        <li>Prev</li>
+        <li
+          id="prevPage"
+          classname={
+            disablePrevButton == false
+              ? "pagination"
+              : "paginationUlLiDisabledFirst"
+          }
+          onClick={handleClick}
+        >
+          Prev
+        </li>
         {renderPageNumbers}
-        <li>Next</li>
+        <li id="nextPage" onClick={handleClick}>
+          Next
+        </li>
       </ul>
     </div>
   );
@@ -87,7 +125,7 @@ function SimpleTable(props) {
     pagingProp,
     totalCount,
   } = props;
-  console.log("table.js->props->totalCount-------->", totalCount);
+  // console.log("table.js->props->totalCount-------->", totalCount);
   // sortProp={},
   // use state returns 2 things 1. the value 2nd the setter func which will take true/false in our case.
   const [isConfirmationDialogOpen, setIsConfirmationDialogOpen] = useState(
@@ -145,11 +183,9 @@ function SimpleTable(props) {
     let { size } = paging; // from state.paging
     let _paging = { page, size };
     setPaging(_paging); // saving in current state var
-
     // sort from state and paging cooked here
     onPageChangeProp({ paging: _paging, sort });
   };
-  // console.log("sort in Table", sort);
   const SortIcon = sort.name
     ? sort.order && sort.order.toLowerCase() == "asc"
       ? ArrowUpwardIcon
