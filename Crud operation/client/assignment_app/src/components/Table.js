@@ -1,5 +1,6 @@
 import React, { useState, Fragment } from "react";
 import PropTypes from "prop-types";
+import cn from "classnames";
 import { withStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -91,17 +92,18 @@ const Pagination = (props) => {
       <ul>
         <li
           id="prevPage"
-          classname={
-            disablePrevButton == false
-              ? "pagination"
-              : "paginationUlLiDisabledFirst"
-          }
+          className={cn({ disabled: page == "1" })}
           onClick={handleClick}
         >
           Prev
         </li>
         {renderPageNumbers}
-        <li id="nextPage" onClick={handleClick}>
+
+        <li
+          id="nextPage"
+          onClick={handleClick}
+          className={cn({ disabled: page == noOfPages })}
+        >
           Next
         </li>
       </ul>

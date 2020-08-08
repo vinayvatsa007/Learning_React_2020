@@ -4,6 +4,10 @@
   padding: 4px 6px;
   ul {
     li {
+      &.disabled {
+        pointer-events: none; //This makes it not clickable
+        opacity: 0.6; //This grays it out to look disabled
+      }
       &:first-child {
         margin-right: 5px;
       }
@@ -20,7 +24,7 @@
     }
   }
 }
-.paginationUlLiDisabledFirst {
+/* .paginationUlLiDisabledFirst {
   border: 1px solid rgba(221, 221, 221, 0.781);
   height: 60px;
   padding: 4px 6px;
@@ -43,8 +47,8 @@
       cursor: pointer;
     }
   }
-}
-.paginationUlLiDisabledLast {
+} */
+/* .paginationUlLiDisabledLast {
   border: 1px solid rgba(221, 221, 221, 0.781);
   height: 60px;
   padding: 4px 6px;
@@ -67,7 +71,7 @@
       cursor: pointer;
     }
   }
-}
+} */
 // .disableFirst {
 //   ul {
 //     li {
