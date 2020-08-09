@@ -50,6 +50,43 @@ class BaseService {
       // new Error({message:error.message, status:error.status})
     }
   };
+  request = async ({ url, params, method = "GET" }) => {
+    try {
+      const serviceURL = this.getUrl(url);
+      let resp = null;
+      //Node Services hosting URL ---- http://localhost:3010/
+      // route=> assignments/totalCount
+      console.log("totalCount method serviceURL ---", serviceURL);
+      switch (method) {
+        case "GET": {
+          console.log(
+            "request method call for 'totalCount', serviceURL ---",
+            serviceURL
+          );
+          resp = await request.get(serviceURL);
+          break;
+        }
+        case "POST": {
+          break;
+        }
+        case "PUT": {
+          break;
+        }
+        case "DELETE": {
+          break;
+        }
+        default:
+          break;
+      }
+
+      console.log("totalCount method results ---", resp.body);
+      return resp.body;
+    } catch (error) {
+      console.log("Error_from_BaseService.js", error);
+      throw error;
+      // new Error({message:error.message, status:error.status})
+    }
+  };
   //Node Services hosting URL ---- http://localhost:3010/students/1
   // route=> students/1
   findById = async (id) => {
