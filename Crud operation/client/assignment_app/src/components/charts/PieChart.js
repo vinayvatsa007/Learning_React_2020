@@ -12,20 +12,20 @@ export default class SimplePieChart extends Component {
   state = {
     color: COLORS,
   };
-  componentDidMount() {
-    let arr = this.state.color.slice();
-    setInterval(() => {
-      /* const color = this.props.data.map((val) => {
-        return getRandomColor();
-      }); */
+  // componentDidMount() {
+  //   let arr = this.state.color.slice();
+  //   setInterval(() => {
+  //     /* const color = this.props.data.map((val) => {
+  //       return getRandomColor();
+  //     }); */
 
-      const poppedVal = arr.pop();
-      // console.log("arr", arr);
-      // console.log("poppedVal", poppedVal);
-      arr.unshift(poppedVal);
-      this.setState({ color: arr });
-    }, 1000);
-  }
+  //     const poppedVal = arr.pop();
+  //     // console.log("arr", arr);
+  //     // console.log("poppedVal", poppedVal);
+  //     arr.unshift(poppedVal);
+  //     this.setState({ color: arr });
+  //   }, 1000);
+  // }
   render() {
     const { data } = this.props;
     console.log("this.state.color", this.state.color);
