@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SimplePieChart from "../../components/charts/PieChart";
 import AssignmentService from "../../services/Assignment";
+import SimpleLineChart from "../../components/charts/SimpleLineChart";
 
 const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -34,6 +35,7 @@ const Dashboard = () => {
     <div>
       <h1>Welcome to My Dashboard</h1>
       <SimplePieChart data={data} />
+      <SimpleLineChart data={data} />
     </div>
   );
 };
