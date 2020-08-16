@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import SimplePieChart from "../../components/charts/PieChart";
 import AssignmentService from "../../services/Assignment";
 import SimpleLineChart from "../../components/charts/SimpleLineChart";
 
 const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([]),
+    spanRef = useRef(),
+    inputRef = useRef({});
 
   //console.log("data, setData", data, setData);
   const assignmentService = new AssignmentService();
@@ -14,8 +16,12 @@ const Dashboard = () => {
   useEffect(() => {
     countBySubject();
     console.log("COMPONENT DID MOUNT IN Dashboard\n\n\n");
+    inputRef.current.focus();
   }, []);
 
+  console.log("element \n\n\n", {
+    ele: inputRef.current,
+  });
   const countBySubject = async () => {
     setIsLoading(true);
     const results = await assignmentService.countBySubject();
@@ -34,8 +40,10 @@ const Dashboard = () => {
   return (
     <div>
       <h1>Welcome to My Dashboard</h1>
+      <span ref={spanRef}>This if using ref in html</span>
+      <input ref={inputRef} />
       <SimplePieChart data={data} />
-      <SimpleLineChart data={data} />
+      {/*  <SimpleLineChart data={data} /> */}
     </div>
   );
 };

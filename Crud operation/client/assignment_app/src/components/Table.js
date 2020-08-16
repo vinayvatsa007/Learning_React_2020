@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useContext } from "react";
 import PropTypes from "prop-types";
 import cn from "classnames";
 import { withStyles } from "@material-ui/core/styles";
@@ -15,6 +15,7 @@ import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import "./Table.scss";
 
+import { DataProvider } from "../App";
 const styles = (theme) => ({
   root: {
     width: "100%",
@@ -28,6 +29,7 @@ const styles = (theme) => ({
 });
 
 const Pagination = (props) => {
+  const propValue = useContext(DataProvider);
   const { paging, totalCountPage } = props;
   const { page, size } = paging;
   const pageNumbers = [];
@@ -70,9 +72,15 @@ const Pagination = (props) => {
     }
   };
 
+  console.log("REACT", React);
   const renderPageNumbers = pageNumbers.map((pgNumber) => {
     return (
-      <li key={pgNumber} id={pgNumber} onClick={handleClick}>
+      <li
+        className="list_item"
+        key={pgNumber}
+        id={pgNumber}
+        onClick={handleClick}
+      >
         {pgNumber}
       </li>
     );
@@ -83,26 +91,45 @@ const Pagination = (props) => {
 
   console.log("disablePrevButton", disablePrevButton);
 
+  const onClickFirst = () => {
+    console.log("Hey this is First");
+  };
+
+  const onClickSec = (e) => {
+    e.preventDefault();
+    console.log("Hey this is Sec");
+  };
+
+  const onClickLast = (e) => {
+    console.log("e", e);
+    //e.stopPropagation();
+    console.log("Hey this is Last");
+  };
   return (
-    <div
-      className={
-        disablePrevButton == false ? "pagination" : "paginationUlLiDisabledLast"
-      }
-    >
-      <ul>
+    <div className={"pagination"}>
+      <div onClick={onClickFirst} className={"fir"}>
+        <form
+          className={"sec"}
+          onSubmit={onClickSec}
+          style={{ color: propValue }}
+        >
+          <input onClick={onClickLast} />
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+      <ul className="list">
         <li
           id="prevPage"
-          className={cn({ disabled: page == "1" })}
+          className={cn("list_item", { disabled: page == "1" })}
           onClick={handleClick}
         >
           Prev
         </li>
         {renderPageNumbers}
-
         <li
           id="nextPage"
           onClick={handleClick}
-          className={cn({ disabled: page == noOfPages })}
+          className={cn("list_item", { disabled: page == noOfPages })}
         >
           Next
         </li>
@@ -154,7 +181,7 @@ function SimpleTable(props) {
   // let finalConfirmationMessage = "vinay";
   const handleDelete = (id) => {
     setFinalConfirmationMessage(
-      // use fragment to wrap muti items
+      // use fragment to wrap multi items
       // <Fragment>
       //   {confirmationDialogContent}
       //   <br />

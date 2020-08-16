@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, createContext, useState } from "react";
 // import Table from './components/Table';
 // import logo from './logo.svg';
 import "./App.css";
@@ -23,8 +23,11 @@ const withDrawer = (location) => {
   }
 };
 
+export const DataProvider = createContext();
+
 const App = () => {
   let location = useLocation();
+  const [contextVal, setContextValue] = useState(1);
   console.log(location);
   console.log("localStorage", localStorage);
   const isDrawer = withDrawer(location);
@@ -32,23 +35,33 @@ const App = () => {
     "App.js->Environment.REACT_APP_SERVICE_URL",
     process.env.REACT_APP_SERVICE_URL
   );
+  const onIncrease = () => {
+    setContextValue(
+      `rgb(${Math.random() * 256}, ${Math.random() * 256},${
+        Math.random() * 256
+      })`
+    );
+  };
   return !isDrawer ? (
     <Drawer>
-      <Switch>
-        {/* switch provides kind of typical switch case alternatives similar to regular ones. just providing options which path to called for a key/ component */}
-        <Route component={Assignments} path={"/Assignments"} />
-        <Route component={Students} path={"/Students"} />
-        {/* its a kind of inline rendering instead of giving component name we telling the route that we rendering a component by its definition/ inline definition */}
-        <Route
-          // render={withAuthentication(() => {
-          //   return <h1>"Hello to my default route"</h1>;
-          // })}
-          // render={}
-          component={Dashboard}
-          path={"/"}
-        />
-        {/* <Route component={Login} path={"/Login"} /> */}
-      </Switch>
+      <button onClick={onIncrease}>Click For Increment : {contextVal}</button>
+      <DataProvider.Provider value={contextVal}>
+        <Switch>
+          {/* switch provides kind of typical switch case alternatives similar to regular ones. just providing options which path to called for a key/ component */}
+          <Route component={Assignments} path={"/Assignments"} />
+          <Route component={Students} path={"/Students"} />
+          {/* its a kind of inline rendering instead of giving component name we telling the route that we rendering a component by its definition/ inline definition */}
+          <Route
+            // render={withAuthentication(() => {
+            //   return <h1>"Hello to my default route"</h1>;
+            // })}
+            // render={}
+            component={Dashboard}
+            path={"/"}
+          />
+          {/* <Route component={Login} path={"/Login"} /> */}
+        </Switch>
+      </DataProvider.Provider>
     </Drawer>
   ) : (
     <Switch>

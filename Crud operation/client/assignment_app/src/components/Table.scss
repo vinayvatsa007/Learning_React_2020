@@ -2,8 +2,17 @@
   border: 1px solid rgba(221, 221, 221, 0.781);
   height: 60px;
   padding: 4px 6px;
-  ul {
-    li {
+
+  .fir {
+    padding: 18px;
+    background-color: #aaa;
+    .sec {
+      padding: 9px;
+      background-color: #666;
+    }
+  }
+  .list {
+    .list_item {
       &.disabled {
         pointer-events: none; //This makes it not clickable
         opacity: 0.6; //This grays it out to look disabled
@@ -23,6 +32,27 @@
       cursor: pointer;
     }
   }
+  /* ul {
+    li {
+      &.disabled {
+        pointer-events: none; //This makes it not clickable
+        opacity: 0.6; //This grays it out to look disabled
+      }
+      &:first-child {
+        margin-right: 5px;
+      }
+      &:last-child {
+        margin-left: 5px;
+      }
+      margin: 0 2px;
+      display: inline;
+      padding: 5px;
+      background-color: grey;
+      color: white;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+  } */
 }
 /* .paginationUlLiDisabledFirst {
   border: 1px solid rgba(221, 221, 221, 0.781);
